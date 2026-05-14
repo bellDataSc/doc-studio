@@ -178,7 +178,7 @@ elif pagina == "Relatório (formulário)":
         plt.close(fig)
 
         # Exibe preview do gráfico
-        st.image(grafico_bytes, caption="Gráfico que será inserido no Word", use_column_width=False, width=500)
+        st.image(grafico_bytes, caption="Gráfico que será inserido no Word", width=500)
 
         # Contexto para o template
         contexto = {
@@ -218,7 +218,7 @@ elif pagina == "Relatório (formulário)":
 
 
 
-elif pagina == " Relatório (upload CSV)":
+elif pagina == "Relatório (upload CSV)":
     st.markdown('<div class="main-header"> Relatório por Upload CSV</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Faça upload de um CSV e gere o Word com loop Jinja2</div>', unsafe_allow_html=True)
 
@@ -233,7 +233,7 @@ Licença de Software,3200.00,Tecnologia
 Relatórios Analíticos,8700.00,Serviços
 """
     st.download_button(
-        " Baixar CSV de exemplo",
+        "Baixar CSV de exemplo",
         data=csv_exemplo,
         file_name="exemplo_dados.csv",
         mime="text/csv",
@@ -251,12 +251,12 @@ Relatórios Analíticos,8700.00,Serviços
 
     if uploaded:
         dados = extrair_de_csv(uploaded.read())
-        st.success(f" CSV carregado: {dados['qtd_itens']} itens | Total: {dados['total_fmt']}")
+        st.success(f"CSV carregado: {dados['qtd_itens']} itens | Total: {dados['total_fmt']}")
 
         df_preview = pd.DataFrame(dados["itens"])
         st.dataframe(df_preview[["nome", "categoria", "valor_fmt"]], use_container_width=True)
 
-        if st.button(" Gerar Relatório Word", type="primary"):
+        if st.button("Gerar Relatório Word", type="primary"):
             # Gráfico de pizza por categoria
             cats = df_preview.groupby("categoria")["valor"].sum()
             fig, ax = plt.subplots(figsize=(6, 6))
@@ -299,7 +299,7 @@ Relatórios Analíticos,8700.00,Serviços
 
 
 
-elif pagina == " Contrato":
+elif pagina == "Contrato":
     st.markdown('<div class="main-header"> Gerador de Contrato</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Demonstra condicionais Jinja2 e múltiplas variáveis de texto</div>', unsafe_allow_html=True)
 
@@ -377,12 +377,12 @@ elif pagina == " Contrato":
             st.error(f"Erro: {e}")
             st.exception(e)
 
-        with st.expander("🔍 Ver contexto JSON enviado ao template"):
+        with st.expander("Ver contexto JSON enviado ao template"):
             st.json(contexto)
 
 
 
-elif pagina == " Inspecionar .docx":
+elif pagina == "Inspecionar .docx":
     st.markdown('<div class="main-header"> Inspecionar Documento Word</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Use python-docx para ler a estrutura interna de qualquer .docx</div>', unsafe_allow_html=True)
 
